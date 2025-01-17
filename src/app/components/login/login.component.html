@@ -1,7 +1,7 @@
 <div class="container min-vh-100">
   <div class="row justify-content-center align-items-center min-vh-100">
     <div class="col-sm-12 col-md-8 col-lg-6">
-      <form (ngSubmit)="(onSubmit)" #form="ngForm">
+      <form (ngSubmit)="onSubmit()" #form="ngForm">
         <div class=" d-flex justify-content-center">
           <label for="email">email</label>
             <input type="email" [(ngModel)]="email" required />
@@ -14,7 +14,7 @@
           <button [disabled]="!form.valid">Accedi</button>
         </div>
         <div class="d-flex justify-content-center">
-          <p>Se non sei registrato, Registrati</p>
+          <p>Se non sei registrato, <a style="cursor: pointer;"><strong (click)="goToRegister()">Registrati</strong></a></p>
         </div>
       </form>
     </div>

@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
@@ -9,8 +8,14 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
+  private router= inject(Router);
+
   email='';
   password='';
+
+  goToRegister(){
+    this.router.navigate(['register']);
+  }
 
   formValid(){
 

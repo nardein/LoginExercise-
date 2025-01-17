@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+
+  private router= inject(Router);
 
   regExp= /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){6,16}$/;
 
@@ -22,6 +24,9 @@ export class RegisterComponent {
     accetto: new FormControl(false, Validators.required)
   })
 
+  goToLogin(){
+    this.router.navigate(['login']);
+  }
   onSubmit(){
 
   }
