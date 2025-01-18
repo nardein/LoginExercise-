@@ -4,25 +4,19 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   standalone: false,
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  private router = inject(Router);
 
-  private router= inject(Router);
+  email = '';
+  password = '';
 
-  email='';
-  password='';
-
-  goToRegister(){
+  goToRegister() {
     this.router.navigate(['register']);
   }
 
-  formValid(){
+  formValid() {}
 
-  }
-
-  onSubmit(){
-
-  }
-
+  onSubmit() {}
 }

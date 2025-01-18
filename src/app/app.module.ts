@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
 //Components Imports
 import { AppComponent } from './app.component';
@@ -18,7 +19,7 @@ import { RegisterComponent } from './components/register/register.component';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,9 +28,10 @@ import { RegisterComponent } from './components/register/register.component';
     PasswordModule,
     FormsModule,
     ReactiveFormsModule,
-    InputTextModule
+    InputTextModule,
+    ButtonModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

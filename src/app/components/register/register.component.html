@@ -2,35 +2,95 @@
   <div class="row justify-content-center align-items-center min-vh-100">
     <div class="col-sm-12 col-md-8 col-lg-6">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class=" d-flex justify-content-center">
-          <label for="nome">nome</label>
-            <input type="text" formControlName="nome" />
-        </div>
-        <div class=" d-flex justify-content-center">
-          <label for="cognome">cognome</label>
-            <input type="text" formControlName="cognome"/>
-        </div>
-        <div class=" d-flex justify-content-center">
-          <label for="email">email</label>
-            <input type="email" formControlName="email"/>
-        </div>
-        <div class="d-flex justify-content-center">
-          <label for="password">password</label>
-            <input type="password" formControlName="password" />
+        <div class="d-flex justify-content-center m-10">
+          <input
+            type="text"
+            pInputText
+            formControlName="nome"
+            placeholder="nome"
+          />
+          <p
+            class="hasError"
+            *ngIf="!form.get('nome')?.valid && form.get('nome')?.touched"
+          >
+            Il campo nome e' obbligatorio
+          </p>
         </div>
         <div class="d-flex justify-content-center">
-          <label for="ripetipassword">Conferma password</label>
-            <input type="password" formControlName="ripetipassword"/>
+          <input
+            type="text"
+            pInputText
+            formControlName="cognome"
+            placeholder="cognome"
+          />
+          <p
+            class="hasError"
+            *ngIf="!form.get('cognome')?.valid && form.get('cognome')?.touched"
+          >
+            Il campo cognome e' obbligatorio
+          </p>
+        </div>
+        <div class="d-flex justify-content-center">
+          <input
+            type="email"
+            pInputText
+            formControlName="email"
+            placeholder="email"
+          />
+          <p
+            class="hasError"
+            *ngIf="!form.get('email')?.valid && form.get('email')?.touched"
+          >
+            Il campo email e' obbligatorio
+          </p>
+          <p class="hasError" *ngIf="form.controls.email.hasError('email')">
+            L'email non e' valida
+          </p>
+        </div>
+        <div class="d-flex justify-content-center">
+          <input type="radio" id="maschio" formControlName="sesso" />
+          <label for="maschio">Maschio</label>
+          <input type="radio" id="femmina" formControlName="sesso" />
+          <label for="femmina">Femmina</label>
+          <input type="radio" id="altro" formControlName="sesso" />
+          <label for="altro">Altro</label>
+        </div>
+        <div class="d-flex justify-content-center">
+          <p-password
+            formControlName="password"
+            [toggleMask]="true"
+            strongRegex="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){6,16}$"
+          />
+        </div>
+        <div class="d-flex justify-content-center">
+          <input
+            type="password"
+            pInputText
+            formControlName="ripetipassword"
+            placeholder="ripetipassword"
+            (ngModelChange)="checkPassword($event)"
+          />
+          <p
+            class="hasError"
+            *ngIf="!form.get('nome')?.valid && form.get('nome')?.touched"
+          >
+            Il campo conferma password e' obbligatorio
+          </p>
         </div>
         <div class="d-flex justify-content-center">
           <label for="accetto">Accetto</label>
-            <input type="checkbox" formControlName="accetto"/>
-        </div>
-        <div class="d-flex justify-content-center ">
-          <button [disabled]="">Accedi</button>
+          <input type="checkbox" formControlName="accetto" />
         </div>
         <div class="d-flex justify-content-center">
-          <p>Se sei già registrato, <a style="cursor: pointer;"><strong (click)="goToLogin()">Accedi</strong></a> </p>
+          <p-button [disabled]="checkForm()">Accedi</p-button>
+        </div>
+        <div class="d-flex justify-content-center">
+          <p>
+            Se sei già registrato,
+            <a style="cursor: pointer"
+              ><strong (click)="goToLogin()">Accedi</strong></a
+            >
+          </p>
         </div>
       </form>
     </div>
