@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
   private router = inject(Router);
-
   passwordValid = false;
 
   regExp = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){6,16}$/;
@@ -25,7 +24,7 @@ export class RegisterComponent {
     ]),
     ripetipassword: new FormControl('', Validators.required),
     sesso: new FormControl('', Validators.required),
-    accetto: new FormControl(false, Validators.required),
+    accetto: new FormControl(false, Validators.requiredTrue),
   });
 
   goToLogin() {
@@ -34,20 +33,29 @@ export class RegisterComponent {
 
   onSubmit() {
     console.log(this.form.value);
+    const formData = this.form.value;
+    window.localStorage.setItem('nome', formData.nome || '');
+    window.localStorage.setItem('cognome', formData.cognome || '');
+    window.localStorage.setItem('sesso', formData.sesso || '');
+    window.localStorage.setItem('email', formData.email || '');
+    window.localStorage.setItem('password', formData.password || '');
+    this.form.reset();
+    this.router.navigateByUrl('login');
   }
 
-  checkPassword(e: string) {
-    if (e === this.form.controls.password.value) {
+  checkPassword() {
+    const password = this.form.controls.password.value;
+    const ripetiPassword = this.form.controls.ripetipassword.value;
+    if (password && ripetiPassword && password === ripetiPassword) {
       this.passwordValid = true;
     } else {
       this.passwordValid = false;
     }
   }
-  checkForm(): boolean {
-    if (this.form.valid && this.passwordValid) {
-      return false;
-    } else {
-      return true;
-    }
+
+  passwordsMatch(): boolean {
+    const password = this.form.get('password')?.value;
+    const ripetiPassword = this.form.get('ripetipassword')?.value;
+    return password === ripetiPassword;
   }
 }

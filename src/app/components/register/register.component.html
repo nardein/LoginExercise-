@@ -3,44 +3,20 @@
     <div class="col-sm-12 col-md-8 col-lg-6">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="d-flex justify-content-center m-10">
-          <input
-            type="text"
-            pInputText
-            formControlName="nome"
-            placeholder="nome"
-          />
-          <p
-            class="hasError"
-            *ngIf="!form.get('nome')?.valid && form.get('nome')?.touched"
-          >
+          <input type="text" pInputText formControlName="nome" placeholder="nome" />
+          <p class="hasError" *ngIf="!form.get('nome')?.valid && form.get('nome')?.touched">
             Il campo nome e' obbligatorio
           </p>
         </div>
         <div class="d-flex justify-content-center">
-          <input
-            type="text"
-            pInputText
-            formControlName="cognome"
-            placeholder="cognome"
-          />
-          <p
-            class="hasError"
-            *ngIf="!form.get('cognome')?.valid && form.get('cognome')?.touched"
-          >
+          <input type="text" pInputText formControlName="cognome" placeholder="cognome" />
+          <p class="hasError" *ngIf="!form.get('cognome')?.valid && form.get('cognome')?.touched">
             Il campo cognome e' obbligatorio
           </p>
         </div>
         <div class="d-flex justify-content-center">
-          <input
-            type="email"
-            pInputText
-            formControlName="email"
-            placeholder="email"
-          />
-          <p
-            class="hasError"
-            *ngIf="!form.get('email')?.valid && form.get('email')?.touched"
-          >
+          <input type="email" pInputText formControlName="email" placeholder="email" />
+          <p class="hasError" *ngIf="!form.get('email')?.valid && form.get('email')?.touched">
             Il campo email e' obbligatorio
           </p>
           <p class="hasError" *ngIf="form.controls.email.hasError('email')">
@@ -48,48 +24,58 @@
           </p>
         </div>
         <div class="d-flex justify-content-center">
-          <input type="radio" id="maschio" formControlName="sesso" />
-          <label for="maschio">Maschio</label>
-          <input type="radio" id="femmina" formControlName="sesso" />
-          <label for="femmina">Femmina</label>
-          <input type="radio" id="altro" formControlName="sesso" />
-          <label for="altro">Altro</label>
+          <label>
+            <input type="radio" id="maschio" name="sesso" value="maschio" formControlName="sesso" />Maschio
+          </label>
+          <label>
+            <input type="radio" id="femmina" name="sesso" value="femmina" formControlName="sesso" />Femmina
+          </label>
+          <label>
+            <input type="radio" id="altro" name="sesso" value="altro" formControlName="sesso" />Altro
+          </label>
+          <div *ngIf="form.get('sesso')?.touched && form.get('sesso')?.invalid">
+            Seleziona il tuo sesso.
+          </div>
         </div>
+
         <div class="d-flex justify-content-center">
-          <p-password
-            formControlName="password"
-            [toggleMask]="true"
-            strongRegex="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){6,16}$"
-          />
-        </div>
-        <div class="d-flex justify-content-center">
-          <input
-            type="password"
-            pInputText
-            formControlName="ripetipassword"
-            placeholder="ripetipassword"
-            (ngModelChange)="checkPassword($event)"
-          />
-          <p
-            class="hasError"
-            *ngIf="!form.get('nome')?.valid && form.get('nome')?.touched"
-          >
-            Il campo conferma password e' obbligatorio
+          <p-password formControlName="password" [toggleMask]="true" placeholder="password"
+            strongRegex="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){6,16}$" />
+          <p class="hasError" *ngIf="!form.get('password')?.valid && form.get('password')?.touched">
+            La password è obbligatoria
+          </p>
+          <p class="hasError" *ngIf="form.controls.password.hasError('pattern')">
+            La password deve contenere almeno un numero, una maiuscola, un carattere speciale con minimo 6 caratteri
           </p>
         </div>
+
         <div class="d-flex justify-content-center">
-          <label for="accetto">Accetto</label>
-          <input type="checkbox" formControlName="accetto" />
+          <p-password formControlName="ripetipassword" [toggleMask]="true" placeholder="ripeti password" />
+          <p class="hasError" *ngIf="!form.get('ripetipassword')?.valid && form.get('ripetipassword')?.touched">
+            Il campo conferma password è obbligatorio
+          </p>
+          <p class="hasError" *ngIf="form.get('ripetipassword')?.touched && !passwordsMatch()">
+            La password non corrisponde
+          </p>
+
         </div>
         <div class="d-flex justify-content-center">
-          <p-button [disabled]="checkForm()">Accedi</p-button>
+          <label>Accetto</label>
+          <input type="checkbox" name="accetto" formControlName="accetto" />
+          <p class="hasError" *ngIf="!form.get('accetto')?.valid && form.get('accetto')?.touched">
+            Il campo accetto e' è obbligatorio
+          </p>
         </div>
+
+        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+          <button [disabled]="form.invalid" type="submit" data-mdb-button-init data-mdb-ripple-init
+            class="btn btn-primary btn-lg">Registrati</button>
+        </div>
+
         <div class="d-flex justify-content-center">
           <p>
             Se sei già registrato,
-            <a style="cursor: pointer"
-              ><strong (click)="goToLogin()">Accedi</strong></a
-            >
+            <a style="cursor: pointer"><strong (click)="goToLogin()">Accedi</strong></a>
           </p>
         </div>
       </form>
