@@ -34,12 +34,8 @@ export class RegisterComponent {
   onSubmit() {
     console.log(this.form.value);
     const formData = this.form.value;
-    window.localStorage.setItem('nome', formData.nome || '');
-    window.localStorage.setItem('cognome', formData.cognome || '');
-    window.localStorage.setItem('sesso', formData.sesso || '');
-    window.localStorage.setItem('email', formData.email || '');
-    window.localStorage.setItem('password', formData.password || '');
-    this.form.reset();
+    window.localStorage.setItem('user', JSON.stringify(formData));
+    window.localStorage.clear;
     this.router.navigateByUrl('login');
   }
 

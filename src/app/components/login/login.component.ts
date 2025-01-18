@@ -16,7 +16,14 @@ export class LoginComponent {
     this.router.navigate(['register']);
   }
 
-  formValid() {}
-
-  onSubmit() {}
+  onSubmit() {
+    const userData = JSON.parse(window.localStorage.getItem('user') || '{}');
+    if (userData.email === this.email && userData.password === this.password) {
+      localStorage.setItem('loggedIn', 'true');
+      localStorage.setItem('loggedUser', JSON.stringify(userData));
+      this.router.navigateByUrl('home');
+    } else {
+      alert('Email o password errati');
+    }
+  }
 }
