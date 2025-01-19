@@ -31,6 +31,10 @@ export class RegisterComponent {
     this.router.navigate(['login']);
   }
 
+  goToTerms() {
+    this.router.navigate(['terms']);
+  }
+
   onSubmit() {
     console.log(this.form.value);
     const formData = this.form.value;
